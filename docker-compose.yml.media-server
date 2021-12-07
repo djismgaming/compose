@@ -1,4 +1,7 @@
-# 20211207
+# 20211207 media server
+# docker-compose file for a media server ready with proper paths for instant move of files from downloader into proper media folders
+# any places between "<>" must be changed (including the <>) to proper personal details
+# I'll try to keep it documented but simple :)
 
 version: "3"
 
