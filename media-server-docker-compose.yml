@@ -13,8 +13,8 @@ services:
   restart: unless-stopped
   network_mode: host
   environment:
-   - PUID=${PUID}
-   - PGID=${PGID}
+   - PUID=<USER ID HERE> # find your current linux user id using command '$ id' in the terminal
+   - PGID=<GROUP ID HERE> # find your current linux group id using '$ id' command in the terminal
    - VERSION=public
   volumes:
    - ${DOCKERDATA}/plex:/config
@@ -31,8 +31,8 @@ services:
   container_name: lidarr
   restart: unless-stopped
   environment:
-   - PUID=${PUID}
-   - PGID=${PGID}
+   - PUID=<USER ID HERE> # find your linux user id using command '$ id' in the terminal
+   - PGID=<GROUP ID HERE> # find your current linux group id using same '$ id' command in the terminal
    - TZ=${TZ}
   volumes:
    - ${DOCKERDATA}/lidarr:/config
@@ -46,8 +46,8 @@ services:
   container_name: radarr
   restart: unless-stopped
   environment:
-   - PUID=${PUID}
-   - PGID=${PGID}
+   - PUID=<USER ID HERE> # find your linux user id using command '$ id' in the terminal
+   - PGID=<GROUP ID HERE> # find your current linux group id using same '$ id' command in the terminal
    - TZ=${TZ}
   volumes:
    - ${DOCKERDATA}/radarr:/config
@@ -61,8 +61,8 @@ services:
   container_name: sonarr
   restart: unless-stopped
   environment:
-   - PUID=${PUID}
-   - PGID=${PGID}
+   - PUID=<USER ID HERE> # find your linux user id using command '$ id' in the terminal
+   - PGID=<GROUP ID HERE> # find your current linux group id using same '$ id' command in the terminal
    - TZ=${TZ}
   volumes:
    - ${DOCKERDATA}/sonarr:/config
@@ -76,8 +76,8 @@ services:
   container_name: transmission
   restart: unless-stopped
   environment:
-   - PUID=${PUID}
-   - PGID=${PGID}
+   - PUID=<USER ID HERE> # find your linux user id using command '$ id' in the terminal
+   - PGID=<GROUP ID HERE> # find your current linux group id using same '$ id' command in the terminal
    - USER=${TRANSMISSION_USER}
    - PASS=${TRANSMISSION_PASS}
    - TZ=${TZ}
@@ -97,8 +97,8 @@ services:
   container_name: bazarr
   restart: unless-stopped
   environment:
-   - PUID=${PUID}
-   - PGID=${PGID}
+   - PUID=<USER ID HERE> # find your linux user id using command '$ id' in the terminal
+   - PGID=<GROUP ID HERE> # find your current linux group id using same '$ id' command in the terminal
    - TZ=${TZ}
   volumes:
    - ${DOCKERDATA}/bazarr:/config
@@ -112,8 +112,8 @@ services:
   container_name: jackett
   restart: unless-stopped
   environment:
-   - PUID=${PUID}
-   - PGID=${PGID}
+   - PUID=<USER ID HERE> # find your linux user id using command '$ id' in the terminal
+   - PGID=<GROUP ID HERE> # find your current linux group id using same '$ id' command in the terminal
    - TZ=${TZ}
   volumes:
    - ${DOCKERDATA}/jackett:/config
