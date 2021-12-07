@@ -1,6 +1,6 @@
-# 20210405
+# 20211207
 
-version: "2"
+version: "3"
 
 services:
 #  adguardhome:
