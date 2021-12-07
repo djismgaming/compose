@@ -6,50 +6,6 @@
 version: "3"
 
 services:
-#  adguardhome:
-#   image: adguard/adguardhome
-#   volumes:
-#     - ${DOCKERDATA}/adguardhome/work:/opt/adguardhome/work
-#     - ${DOCKERDATA}/adguardhome/conf:/opt/adguardhome/conf
-#   ports:
-#     - 53:53/tcp
-#     - 53:53/udp
-#     - 3000:3000/tcp
-#   restart: unless-stopped
-#   network_mode: host
-
- openvpn-as:
-  image: linuxserver/openvpn-as
-  #image: linuxserver/openvpn-as:2.7.5-ls22
-  container_name: openvpn-as
-  cap_add:
-   - NET_ADMIN
-  environment:
-   - PUID=${PUID}
-   - PGID=${PGID}
-   - TZ=${TZ}
-   - INTERFACE=eth0 #optional
-  volumes:
-   - ${DOCKERDATA}/openvpn-as:/config
-  ports:
-   - 943:943
-   - 9443:9443
-   - 1194:1194/udp
-  restart: unless-stopped
-  network_mode: bridge
-
- sync:
-  container_name: sync
-  image: resilio/sync
-  restart: unless-stopped
-  environment:
-   - PUID=${PUID}
-   - PGID=${PGID}
-  ports:
-   - 55555:55555
-   - 8888:8888
-  volumes:
-   - ${SYNCSTORAGE}:/mnt/sync
 
  jdownloader:
   container_name: jdownloader
