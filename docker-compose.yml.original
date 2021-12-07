@@ -1,0 +1,356 @@
+# 20211207 media server
+# docker-compose file for a media server ready with proper paths for instant move of files from downloader into proper media folders
+# any places between "<>" must be changed (including the <>) to proper personal details
+# I'll try to keep it documented but simple :)
+
+version: "3"
+
+services:
+#  adguardhome:
+#   image: adguard/adguardhome
+#   volumes:
+#     - ${DOCKERDATA}/adguardhome/work:/opt/adguardhome/work
+#     - ${DOCKERDATA}/adguardhome/conf:/opt/adguardhome/conf
+#   ports:
+#     - 53:53/tcp
+#     - 53:53/udp
+#     - 3000:3000/tcp
+#   restart: unless-stopped
+#   network_mode: host
+
+ openvpn-as:
+  image: linuxserver/openvpn-as
+  #image: linuxserver/openvpn-as:2.7.5-ls22
+  container_name: openvpn-as
+  cap_add:
+   - NET_ADMIN
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+   - TZ=${TZ}
+   - INTERFACE=eth0 #optional
+  volumes:
+   - ${DOCKERDATA}/openvpn-as:/config
+  ports:
+   - 943:943
+   - 9443:9443
+   - 1194:1194/udp
+  restart: unless-stopped
+  network_mode: bridge
+
+ sync:
+  container_name: sync
+  image: resilio/sync
+  restart: unless-stopped
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+  ports:
+   - 55555:55555
+   - 8888:8888
+  volumes:
+   - ${SYNCSTORAGE}:/mnt/sync
+
+ jdownloader:
+  container_name: jdownloader
+  image: jlesage/jdownloader-2
+#  build: .
+  environment:
+   - USER_ID=${PUID}
+   - GROUP_ID=${PGID}
+   - TZ=${TZ}
+   - UMASK=${UMASK}
+   - KEEP_APP_RUNNING=1
+   - DISPLAY_WIDTH=${DISPLAY_WIDTH}
+   - DISPLAY_HEIGHT=${DISPLAY_HEIGHT}
+   - VNC_PASSWORD=${PASSWD}
+  ports:
+   - 3129:3129
+   - "5800"
+   - 5901:5900
+  restart: unless-stopped
+  volumes:
+   - ${DOCKERDATA}/jdownloader:/config
+   - ${DOWNLOADDIR}/jdownloader:/output
+
+ qdirstat:
+  image: jlesage/qdirstat
+  container_name: qdirstat
+  environment:
+   - USER_ID=${PUID}
+   - GROUP_ID=${PGID}
+   - TZ=${TZ}
+   - UMASK=${UMASK}
+   - KEEP_APP_RUNNING=1
+   - DISPLAY_WIDTH=${DISPLAY_WIDTH}
+   - DISPLAY_HEIGHT=${DISPLAY_HEIGHT}
+   - VNC_PASSWORD=${PASSWD}
+  ports:
+   - "5800"
+   - 5903:5900
+  restart: unless-stopped
+  volumes:
+   - ${DOCKERDATA}/qdirstat:/config
+   - ${SERVERDIRQ}:/storage
+   - ${NASHOME}:/server
+   
+ swag:
+  image: linuxserver/swag
+  container_name: swag
+  restart: unless-stopped
+  cap_add:
+   - NET_ADMIN
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+   - TZ=${TZ}
+   - URL=${SWAG_URL}
+   - SUBDOMAINS=${SWAG_SUBDOMAINS}
+   - VALIDATION=${SWAG_VALIDATION}
+   - DNSPLUGIN=${SWAG_DNSPLUGIN} #optional
+   - EMAIL=${SWAG_EMAIL} #optional
+   - DHLEVEL=${SWAG_DH_LEVEL} #optional
+   - ONLY_SUBDOMAINS=${SWAG_ONLY_SUBDOMAINS} #optional
+   - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
+   - GF_SERVER_DOMAIN=${GF_SERVER_DOMAIN}
+  volumes:
+   - ${DOCKERDATA}/swag:/config
+  ports:
+   - 444:443
+   - 81:80 #optional
+
+ duckdns:
+  image: linuxserver/duckdns
+  container_name: duckdns
+  restart: always
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+   - TZ=${TZ}
+   - SUBDOMAINS=${DUCKDNS_SUBDOMAINS}
+   - TOKEN=${DUCKDNS_TOKEN}
+  volumes:
+   - ${DOCKERDATA}/duckdns:/config
+
+ # portainer:
+  # image: portainer/portainer-ce
+  # container_name: portainer
+  # restart: unless-stopped
+  # command: -H unix:///var/run/docker.sock
+  # ports:
+   # - 9000:9000
+  # volumes:
+   # - /var/run/docker.sock:/var/run/docker.sock
+   # - ${DOCKERDATA}/portainer:/data
+
+ heimdall:
+  image: linuxserver/heimdall
+  container_name: heimdall
+  restart: unless-stopped
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+   - TZ=${TZ}
+  volumes:
+   - ${DOCKERDATA}/heimdall:/config
+  ports:
+   - "80"
+   - "443"
+
+ kod:
+  image: linuxserver/nginx
+  container_name: kod
+  restart: unless-stopped
+  ports:
+   - 90:80
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+  volumes:
+   - ${DOCKERDATA}/kod:/config
+   - ${SERVERDIR}:/server
+  
+ bazarr:
+  image: linuxserver/bazarr
+  container_name: bazarr
+  restart: unless-stopped
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+   - TZ=${TZ}
+  volumes:
+   - ${DOCKERDATA}/bazarr:/config
+   - ${MOVIESDIR}:/movies
+   - ${TVDIR}:/tv
+  ports:
+   - 6767:6767
+
+ jackett:
+  image: linuxserver/jackett
+  container_name: jackett
+  restart: unless-stopped
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+   - TZ=${TZ}
+  volumes:
+   - ${DOCKERDATA}/jackett:/config
+   - ${WATCHDIR}:/downloads
+  ports:
+   - 9117:9117
+
+ beets:
+  image: linuxserver/beets
+  container_name: beets
+  restart: unless-stopped
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+   - TZ=${TZ}
+   - UMASK=${UMASK}
+  volumes:
+   - ${DOCKERDATA}/beets:/config
+   - ${MUSICDIR}:/music
+   - ${ORGANIZEDIR}:/downloads
+  ports:
+   - 8337:8337
+
+ plex:
+  image: linuxserver/plex
+  container_name: plex
+  restart: unless-stopped
+  network_mode: host
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+   - VERSION=public
+  volumes:
+   - ${DOCKERDATA}/plex:/config
+   - ${TVDIR}:/data/tvshows
+   - ${MOVIESDIR}:/data/movies
+   - ${MUSICDIR}:/data/music
+   - ${MUSICDIR}-video:/data/music-video
+   - ${PICSDIR}:/data/pics
+  devices:
+   - /dev/dri:/dev/dri # For H/W transcoding
+
+ tautulli:
+  image: linuxserver/tautulli
+  container_name: tautulli
+  restart: unless-stopped
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+   - TZ=${TZ}
+  volumes:
+   - ${DOCKERDATA}/tautulli:/config
+   - ${PLEXLOGDIR}:/logs
+  ports:
+   - 8181:8181
+
+ lidarr:
+  image: linuxserver/lidarr
+  container_name: lidarr
+  restart: unless-stopped
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+   - TZ=${TZ}
+  volumes:
+   - ${DOCKERDATA}/lidarr:/config
+   - ${MUSICDIR}:/music
+   - ${DOWNLOADDIR}:/downloads
+  ports:
+   - 8686:8686
+
+ radarr:
+  image: linuxserver/radarr
+  container_name: radarr
+  restart: unless-stopped
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+   - TZ=${TZ}
+  volumes:
+   - ${DOCKERDATA}/radarr:/config
+   - ${MOVIESDIR}:/movies
+   - ${DOWNLOADDIR}:/downloads
+  ports:
+   - 7878:7878
+
+ sonarr:
+  image: linuxserver/sonarr
+  container_name: sonarr
+  restart: unless-stopped
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+   - TZ=${TZ}
+  volumes:
+   - ${DOCKERDATA}/sonarr:/config
+   - ${TVDIR}:/tv
+   - ${DOWNLOADDIR}:/downloads
+  ports:
+   - 8989:8989
+
+#  transmission:
+#   image: linuxserver/transmission
+#   container_name: transmission
+#   restart: unless-stopped
+#   environment:
+#    - PUID=${PUID}
+#    - PGID=${PGID}
+#    - USER=${TRANSMISSION_USER}
+#    - PASS=${TRANSMISSION_PASS}
+#    - TZ=${TZ}
+#    - TRANSMISSION_WEB_HOME=${TRANSMISSION_WEB}
+#    - UMASK=${UMASK}
+#   volumes:
+#    - ${DOCKERDATA}/transmission:/config
+#    - ${WATCHDIR}:/watch
+#    - ${DOWNLOADDIR}:/downloads
+#   ports:
+#    - 9091:9091
+#    - 51413:51413
+#    - 51413:51413/udp
+
+ deluge:
+  image: ghcr.io/linuxserver/deluge
+  container_name: deluge
+  network_mode: host
+  environment:
+    - PUID=${PUID}
+    - PGID=${PGID}
+    - TZ=${TZ}
+    - UMASK=${UMASK}
+  volumes:
+    - ${DOCKERDATA}/deluge:/config
+    - ${DOWNLOADDIR}:/downloads
+  restart: unless-stopped
+
+ grocy:
+  image: linuxserver/grocy
+  container_name: grocy
+  environment:
+   - PUID=${PUID}
+   - PGID=${PGID}
+   - TZ=${TZ}
+  volumes:
+   - ${DOCKERDATA}/grocy:/config
+  ports:
+   - 9283:80
+  restart: unless-stopped
+
+ taisun:
+  image: linuxserver/taisun
+  container_name: taisun
+  volumes:
+   - /var/run/docker.sock:/var/run/docker.sock
+  ports:
+   - "3000"
+  restart: unless-stopped
+
+networks:
+ default:
+  external:
+   name: linuxserver
