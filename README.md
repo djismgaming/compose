@@ -6,7 +6,7 @@ docker-compose files for fast server deployment with docker containers
   - macOS with docker desktop
 
 ## Getting Started
-Just copy this YAML to any directory in your system 
+1. Just copy this YAML to any directory in your system
 https://github.com/djismgaming/compose/blob/main/docker-compose.yml
 and run docker-compose up -d
 
