@@ -35,8 +35,8 @@ Also takes into consideration that the environment variables (which can be chang
 
 | Directory                     | Usage |
 | ----------------------------- | ----- |
-| `PUID`                        | user to use for permissions in files created  |
-| `PGID`                        | group to use for permissions in files created |
+| `PUID`                        | user to use for permissions in files created by the container |
+| `PGID`                        | group to use for permissions in files created by the container |
 | `TZ`                          | time-zone (optional, set to America/Puerto_Rico) |
 
 ## Optional - cleaning the yaml comments to leave a clean docker-compose file
