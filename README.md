@@ -37,7 +37,7 @@ Also takes into consideration that the environment variables (which can be chang
 | ----------------------------- | ----- |
 | `PUID`                        | user to use for permissions in files created  |
 | `PGID`                        | group to use for permissions in files created |
-| `TZ`                          | time-zone (optional) |
+| `TZ`                          | time-zone (optional, set to America/Puerto_Rico) |
 
 ## Optional - cleaning the yaml comments to leave a clean docker-compose file
 (this is not required in order to use the YAML file with docker-compose)
