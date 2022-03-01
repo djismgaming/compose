@@ -25,11 +25,11 @@ This will create and run containers of these apps:
 This also takes into consideration that the directories to be used (which can be changed by you in the file) are
 | Directory                     | Usage |
 | ----------------------------- | ----- |
-| `/mnt/user/appdata/<appname>` | for |
-| `/mnt/user/media/tv`          | for |
-| `/mnt/user/media/movies`      | for |
-| `/mnt/user/media/music`       | for |
-| `/mnt/user/media/watch`       | for |
+| `/mnt/user/appdata/<appname>` | for app configuration and data storage |
+| `/mnt/user/media/tv`          | for tv shows media files |
+| `/mnt/user/media/movies`      | for movies media files |
+| `/mnt/user/media/music`       | for music media files |
+| `/mnt/user/media/watch`       | for direct downloads from `jackett` to be added to `transmission` to download |
 
 Also takes into consideration that the environment variables (which can be changed by you in the file) to be passed on to the container are
 
