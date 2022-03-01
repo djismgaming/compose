@@ -13,12 +13,13 @@ https://github.com/djismgaming/compose/blob/main/docker-compose.yml
 
 This will create and run containers of these apps:
 - [linuxserver/plex](https://docs.linuxserver.io/images/docker-plex) (media server)
-- linuxserver/lidarr (music library enhancer)
-- linuxserver/radarr (movie library enhancer)
-- linuxserver/sonarr (tv shows library enhancer)
-- linuxserver/transmission (media downloader)
-- linuxserver/bazarr (subtitles downloader)
-- linuxserver/jackett (downloader indexer)
+- [linuxserver/lidarr](https://docs.linuxserver.io/images/docker-lidarr
+) (music library enhancer)
+- [linuxserver/radarr](https://docs.linuxserver.io/images/docker-radarr) (movie library enhancer)
+- [linuxserver/sonarr](https://docs.linuxserver.io/images/docker-sonarr) (tv shows library enhancer)
+- [linuxserver/transmission](https://docs.linuxserver.io/images/docker-transmission) (media downloader)
+- [linuxserver/bazarr](https://docs.linuxserver.io/images/docker-bazarr) (subtitles downloader)
+- [linuxserver/jackett](https://docs.linuxserver.io/images/docker-jackett) (downloader indexer)
 
 ## Optional - cleaning the yaml comments to leave a clean docker-compose file
 (this is not required in order to use the YAML file with docker-compose)
