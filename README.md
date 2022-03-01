@@ -10,6 +10,14 @@ docker-compose files for fast server deployment with docker containers
 https://github.com/djismgaming/compose/blob/main/docker-compose.yml
 2. Run `docker-compose up -d`
 
+This will create and run containers for these apps:
+- linuxserver/plex (media server)
+- linuxserver/lidarr (music library enhancer)
+- linuxserver/radarr (movie library enhancer)
+- linuxserver/sonarr (tv shows library enhancer)
+- linuxserver/transmission (media downloader)
+- linuxserver/bazarr (subtitles downloader)
+- linuxserver/jackett (downloader indexer)
 
 ## Optional - cleaning the yaml comments to leave a clean docker-compose file
 (this is not required in order to use the YAML file with docker-compose)
