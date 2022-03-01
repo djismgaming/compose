@@ -29,7 +29,7 @@ This also takes into consideration that the directories to be used (which can be
 | `/mnt/user/media/tv`          | for tv shows media files |
 | `/mnt/user/media/movies`      | for movies media files |
 | `/mnt/user/media/music`       | for music media files |
-| `/mnt/user/media/watch`       | for direct downloads from `jackett` to be added for `transmission` to download |
+| `/mnt/user/media/watch`       | for direct downloads from `jackett` to be added and downloaded by `transmission` |
 
 Also takes into consideration that the environment variables (which can be changed by you in the file) to be passed on to the container are
 
