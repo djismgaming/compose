@@ -8,7 +8,7 @@ docker-compose files for fast server deployment with docker containers
 ## Getting Started
 1. Copy this YAML to any directory in your system
 https://github.com/djismgaming/compose/blob/main/docker-compose.yml
-2. Run `docker-compose up -d`
+2. Run `docker-compose up -d` while in the directory where the YAML file resides
 
 This will create and run containers of these apps:
 - linuxserver/plex (media server)
