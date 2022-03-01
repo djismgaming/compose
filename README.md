@@ -31,6 +31,14 @@ This also takes into consideration that the directories to be used (which can be
 | `/mnt/user/media/music`       | for |
 | `/mnt/user/media/watch`       | for |
 
+Also takes into consideration that the environment variables (which can be changed by you in the file) to be passed on to the container are
+
+| Directory                     | Usage |
+| ----------------------------- | ----- |
+| `PUID`                        | for |
+| `PGID`                        | for |
+| `TZ`                          | for |
+
 ## Optional - cleaning the yaml comments to leave a clean docker-compose file
 (this is not required in order to use the YAML file with docker-compose)
 
