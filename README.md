@@ -11,7 +11,7 @@ https://github.com/djismgaming/compose/blob/main/docker-compose.yml
 2. Run `docker-compose up -d`
 
 
-## Cleaning the yaml comments to leave a clean docker-compose file
+## Optional - Cleaning the yaml comments to leave a clean docker-compose file
 (this is not required in order to use the YAML file with docker-compose)
 
 These instructions are for use in Notepad++, my favorite editor in Windows :D
