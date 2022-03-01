@@ -6,6 +6,7 @@ docker-compose files for fast server deployment with docker containers
   - macOS with docker desktop
 
 ## Cleaning the yaml comments to leave a clean docker-compose file
+(this is not required in order to use the yaml file with docker-compose)
 These instructions are for use in Notepad++, my favorite editor in Windows :D
 
 ![cleaning the yaml file in notepad++](/assets/compose-clean-notepadd.png)
