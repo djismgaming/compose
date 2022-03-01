@@ -12,7 +12,8 @@ https://github.com/djismgaming/compose/blob/main/docker-compose.yml
 2. Run `docker-compose up -d` while in the directory where the YAML file resides
 
 This will create and run containers of these apps:
-- <a href="https://docs.linuxserver.io/images/docker-plex" target="_blank">linuxserver/plex</a> (media server)
+- [linuxserver/plex](https://docs.linuxserver.io/images/docker-plex
+) (media server)
 - [linuxserver/lidarr](https://docs.linuxserver.io/images/docker-lidarr
 ) (music library enhancer)
 - [linuxserver/radarr](https://docs.linuxserver.io/images/docker-radarr) (movie library enhancer)
