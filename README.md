@@ -35,9 +35,9 @@ Also takes into consideration that the environment variables (which can be chang
 
 | Directory                     | Usage |
 | ----------------------------- | ----- |
-| `PUID`                        | for |
-| `PGID`                        | for |
-| `TZ`                          | for |
+| `PUID`                        | user to use for permissions in files created  |
+| `PGID`                        | group to use for permissions in files created |
+| `TZ`                          | time-zone (optional) |
 
 ## Optional - cleaning the yaml comments to leave a clean docker-compose file
 (this is not required in order to use the YAML file with docker-compose)
