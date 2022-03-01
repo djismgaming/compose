@@ -22,6 +22,15 @@ This will create and run containers of these apps:
 - [linuxserver/bazarr](https://docs.linuxserver.io/images/docker-bazarr) (subtitles downloader)
 - [linuxserver/jackett](https://docs.linuxserver.io/images/docker-jackett) (downloader indexer)
 
+This also takes into consideration that the directories to be used (which can be changed by you in the file) are
+| Directory                     | Usage |
+| ----------------------------- | ----- |
+| `/mnt/user/appdata/<appname>` | for |
+| `/mnt/user/media/tv`          | for |
+| `/mnt/user/media/movies`      | for |
+| `/mnt/user/media/music`       | for |
+| `/mnt/user/media/watch`       | for |
+
 ## Optional - cleaning the yaml comments to leave a clean docker-compose file
 (this is not required in order to use the YAML file with docker-compose)
 
