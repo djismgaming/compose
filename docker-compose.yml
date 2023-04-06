@@ -23,7 +23,7 @@ services:
    - /mnt/user/media/movies:/data/movies # directory where the movies will be stored and read
    - /mnt/user/media/music:/data/music # directory where the music will be stored and read
   devices:
-   - /dev/dri:/dev/dri # for hardware transcoding
+  #  - /dev/dri:/dev/dri # for hardware transcoding
 
  lidarr:
   image: linuxserver/lidarr
