@@ -22,7 +22,7 @@ services:
    - /mnt/user/media/tv:/data/tvshows # directory where the tv shows will be stored and read
    - /mnt/user/media/movies:/data/movies # directory where the movies will be stored and read
    - /mnt/user/media/music:/data/music # directory where the music will be stored and read
-  devices:
+  # devices:
   #  - /dev/dri:/dev/dri # for hardware transcoding
 
  lidarr:
